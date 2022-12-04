@@ -3,22 +3,46 @@ string text = new string(Console.ReadLine());
 string[] textmassive(string text)
 {
     string[] splited = text.Split(' ');
-                       text.Split(',');
-                       text.Split('.');
-                       text.Split('!');
-                       text.Split('?');
+    text.Split(',');
+    text.Split('.');
+    text.Split('!');
+    text.Split('?');
+    text.Split('(');
+    text.Split(')');
+    text.Split(':');
     return splited;
 }
-string lenght(string[] splited)
+int size(string[] splited)
 {
-string res = string.Empty;
-for (int i = 0; i < splited.Length; i++)
-{
-    if (splited[i].Length <4) 
+    int resultlenght = 0;
+    for (int i = 0; i < splited.Length; i++)
     {
-        res += $"{splited[i]}, ";
+        if (splited[i].Length < 4)
+        {
+            resultlenght = resultlenght + 1;
+        }
+    }
+    return resultlenght;
+}
+string[] newarray(string[] splited, int resultlenght)
+{
+    string[] res = new string[resultlenght];
+    int j = 0;
+    for (int i = 0; i < splited.Length; i++)
+    {
+        if (splited[i].Length < 4)
+        {
+            res[j] = splited[i];
+            j++;
+        }
+    }
+    return res;
+}
+void ArrayPrint(string[] res)
+{
+    for (int i = 0; i < res.GetLength(0); i++)
+    {
+        Console.Write($"{res[i]} ");
     }
 }
-return res;
-}
-Console.WriteLine(lenght(textmassive(text)));
+ArrayPrint(newarray(textmassive(text), size(textmassive(text))));
